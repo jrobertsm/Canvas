@@ -1,0 +1,980 @@
+6.42 January 6 2009 ("HighFivesAndFluteMusic" release)
+
+*New GUI functionality: Search, NewModules, FavoriteModules, DataView.
+Improvements in auto new host targetting and 'Enter' for OK clicks.
+
+*New MOSDEF Parser for increased MOSDEF compilation speeds and lower memory
+usage
+
+This release also includes the following CANVAS Early updates:
+
+* IP & ICMP Heuristic/Fingerprinting modules
+* Roundcube remote exploit CVE-2008-5619
+* MITM NTLMv1 credential reflection attacks (MS08-068).
+* MS XML Parsing vulnerability (MS08-078) working against DEP targets
+with the .NET technique.
+* New reconnaissance modules ICMPSweep, ARPScan, ARPScanner and
+UDPportscan for gathering intelligence in various low footprint ways.
+* MOSDEF ICMP proxy module updated to support multiple TCP callbacks
+using session IDs, and allows the maximum packet size to be adjusted in
+the CANVAS GUI.
+
+6.41 December 1 2008 ("TooMuchTurkey" release)
+
+This release includes the following CANVAS Early updates:
+
+Previous Month's CANVAS Early Updates:
+
+# November 24, 2008 Our Lotus Domino Notes 8.0.0 HTTP Accept-Language Overflow exploit is now working reliably against Windows 2003 (SP2)
+# November 12, 2008 GoodTech SSH Server (current distributed version is vulnerable) Post-Auth Remote Code Execution Exploit [2K, XP, 2K3]
+# November 6, 2008 Simple Machines Forum * => 1.1.6 Remote Code Execution Exploit
+# November 3, 2008 Mantis BugTracker Remote PHP code execution exploit.
+
+Feature updates:
+
+# ICMP proxy support for MOSDEF
+# Complete rethreading implementation for large parallel scans, providing new modules massattack2 and VulnAssess2
+# SPIKE proxy improved POST support
+
++ various GUI and docuemntation fixes in all sorts of places.
+
+6.40 November 4 2008 ("ElectionDay" release!!)
+
+This release includes the following CANVAS Early updates:
+
+Previous Month's CANVAS Early Updates
+# November 4, 2008 Adobe Acrobat Reader util.printf() exploit
+# November 3, 2008 Mantis BugTracker Remote PHP code execution exploit.
+# October 28, 2008 Module to brute force the basic authentication used in most common routers administration panel.
+# October 27, 2008 The Windows rootkit has been updated with file and directory hiding capabilities.
+# October 24, 2008 Exploit (Windows 2000 (All SP's) and XP (SP0) and  2K3 (SP0) all languages, XP (SP2/SP3) and 2K3 (SP1/SP2) English) for the Windows Server Service Vulnerability (MS08-067)
+# October 23, 2008 AIX Local Root Exploitation support (CVE-2007-4513 added)
+# October 22, 2008 Exploit (Windows 2000) for the Windows Internet Printing Service Vulnerability (MS08-062)
+# October 20, 2008 AIX Local Root Exploitation support (updated)
+# October 20, 2008 The newest enhancement to the ram_dumper module has the driver dump the contents of RAM directly across the network back to CANVAS.
+# October 17, 2008 PoC (command execution) for the Microsoft HIS Vulnerability (MS08-059)
+# October 17, 2008 PoC (overflow trigger, BSOD) for the Windows SMB Server Vulnerability (MS08-063)
+
+Feature updates:
+
+# SSH_brute updates
+# Nessus report support updated to handle Nessus 3 format reports
+# VulnAssess updated to allow toggleable whereami and traceroute features
+# Spike proxy updates - improved JSON support
+
+6.39 October 1, 2008
+
+This release includes the following CANVAS Early updates:
+
+# September 25, 2008 Proof of Concept for the Firefox UTF8 stack overflow
+# September 22, 2008 Working exploit for citectscada odbc buffer overflow
+# September 19, 2008 AIX PPC MOSDEF Support
+# September 16, 2008 A working exploit for the MS08_053 vulnerability
+# September 9, 2008 Immunity has released a POC for the GetDetailString vulnerability (MS08-053) fixed in Microsoft's September patch set.
+# September 4, 2008 DR RootKit update: SMP support
+
+Exploit updates (new, updated):
+
+# firefox_utf8  (CVE-2008-0016)
+# citect_scada  (CVE-2008-2639)
+# ms08_053      (CVE-2008-3008)
+
+Feature updates:
+
+# AIX MOSDEF BETA (5.1/5.2), syscall set aware
+# AIX shellcode encoder with dtpscd versioning routine
+# HTTP MOSDEF via CANVAS NAT Interface
+# DR/CANVAS RootKit SMP support
+
+6.38 September 2, 2008
+
+This release includes the following CANVAS Early updates:
+
+# August 25, 2008 Exploit for MS08-049: Stack overflow in EventSystem 
+  service (for XP SP2 with DEP AlwaysOff)
+# August 20, 2008 Debug Register IA32 Linux Kernel 2.6 hooking Rootkit 
+  Reference Implementation (tested/verified for Ubuntu and CentOS)
+# August 19, 2008 DokuWiki remote code execution exploit
+# August 11, 2008  Working exploit for Citrix heap overflow
+
+Exploit updates (new, updated):
+
+# e107 PHP Exec exploit
+# Citrix Heap overflow exploit (Bypasses DEP on Windows 2003!)
+
+Feature updates:
+
+# Double clicking on a module status displays the log for that exploit 
+# Commandline is available at the bottom of the screen. This runs 
+  modules as if you had used "runmodule" from the standard commandline.  
+  It's useful for clickscripts. A commandline history is kept and can be 
+  navigated with up and down arrow keys. Example: runcommand -O 
+  command:"id -a" 
+# Fixes for SMB VFS nodes on Windows (lines are now drawn correctly)
+# File browser is available as an option in the Node menu. This will
+  pop up a little file browser. You can double-click on a file or 
+  directory to refresh it.
+# Listener Shell is available from the Node menu
+# Listener Shells now have an IP address in their title bar
+# New "forking" Win32 payload
+# New "binary attach" Win32 payload
+# canvasengine.py -D now spits out Docs-Lite.txt, Docs.csv and Docs.xml
+  which gives you a summary of all the documentation for all modules.
+  Docs-Lite only lists the module name, cve number and cve url
+
+6.37 August 3rd, 2008
+
+This release includes the following CANVAS Early updates:
+
+# July 28, 2008 Updated Windows Rootkit (supports process hiding, 2K, XP, etc)
+# July 23, 2008 Exploit for Trixbox (PHP)
+# July 9, 2008 Exploit for Firefox 2.0.0.14 Javascript defineSetter Memory Corruption
+
+Exploit updates (new, updated):
+
+# ms03_049 VirtualServer support added
+
+Feature updates and bug fixes:
+
+# new memory harvest module for parsing memory dumps
+# new dns cache module for grabbing dns cache on compromised hosts
+# new payload generation engine for exploit developers
+# improved CANVAS WIN32 smbclient support
+# improved commandline parsing
+# improved installmosdefservice/installremotemosdefservice
+# fixed SaveHost commandline pickle bug
+# fixed win32 commandline help formatting
+# fixed win32 SeDebugPrivilege token payloads
+
+6.36 July 2nd, 2008
+
+This release includes the following CANVAS Early updates:
+
+# July 2, 2008 Exploit for BrowserCRM PHP RFI
+# June 20, 2008: Alt-N Security Gateway 1.0.1 - Admin HTTP Server Overflow
+# June 16, 2008: Windows Kernel Rootkit Update
+# June 16, 2008: MS08_034 update (2003 SP0/SP1) Overflow
+# June 12, 2008: Exploit for MS08-034 (for Windows 2000)
+# June 12, 2008: Shoutcast Format String Exploit (Linux)
+# June 11, 2008: Exploit for booby 1.0.1 RFI.
+# June 4, 2008: Exploit for CVE-2008-2144 (Solaris in.lpd)
+
+Exploit updates (new, updated):
+
+# shoutcast_fs
+# ms08_034
+# booby_include
+# browsercrm_include
+# sol_printer_conf
+
+Feature updates:
+
+# Improved Linux payload engine 
+# Improved MOSDEF Solaris Intel support 
+# Improved UnixShellnode converttomosdef support
+# Improved MOSDEF commandline listener
+# Improved Windows rootkit New: Beta 
+# Improved SPIKE Proxy 
+# New: PHPExploit RFI library
+# New: MOSDEF OS X Intel support (BETA) 
+
+6.35 June 2, 2008
+
+This release includes the following CANVAS Early updates:
+
+# May 21, 2008: I2OMGMT local exploit for XP/Vista/2008
+# May 19, 2008: OLE Binder (Embeds an Executable into a Word Document)
+# May 14, 2008: Big Ant Long GET overflow (working exploit)
+
+Exploit updates (new, updated):
+
+# binder
+# bigant22
+# i2omgmt
+
+Feature updates:
+
+# Full PHP ScriptNode MOSDEFSock support
+# Sniffer improvements
+
+6.34 May 1, 2008
+
+This release includes the following CANVAS Early Updates:
+
+# April 14, 2008: Exploit for Flash DefineSceneAndFrameLabelDataTag overflow 
+# April 14, 2008:  Useful MSRPC Fuzzer Module
+# April 10th, 2008:  WU-FTPD Glob Exploit (Golden Oldie)
+# April 8th, 2008: MS08-025 Exploit for Vista and Windows Server 2008
+# April 24, 2008: Web Attack Modules Updates
+
+Exploit updates (new, updated):
+
+# flash_duke
+# wuglob
+# ms08_025
+# dragoon_include
+# joomlacp_include
+# phpblock_include
+# wpflash_include
+# fuzzylime_include
+# joomlaoflq_include
+# quinsonnas_include
+# grape_include
+# newsoffice_include
+# visualpic_include
+# jafcms_include
+# phpauction_include
+# wpbackup_include
+# BABYBOTTLE
+# flash_duke
+# ani_cursor
+# acrobat_js
+# real_import
+# ms07_051
+# ms07_004
+# ms06_071
+# ms06_057
+# ms06_055
+
+Feature updates:
+
+# Improved HTTP and HTTPS support for HTTPMOSDEF
+# A MOSDEF Disk Spidering module (search for *.filetype on a node)
+# MSRPC Fuzzer Module
+
+6.33 April 1, 2008
+
+This release includes the following CANVAS Early Updates:
+
+# April 1st, 2008: Socket Recycling exploit for ASUS Eee SAMBA 3.24
+# March 10th, 2008: Full MOSDEF exploit for vmsplice(2) Linux kernel bug
+# March 7th, 2008: Exploit for MS07-066: Windows Vista Privilege Esc.
+
+Exploit updates (new, updated):
+
+# barryvan PHP include bug
+# groupe PHP include bug
+# php oracle PHP include bug
+# podcastgen PHP include bug
+# wpsniplets PHP exec bug
+
+Feature updates:
+
+# improved SMB/DCE-RPC support
+# improved Windows rootkit support
+
+6.32 March 3, 2008:
+
+This release includes the following CANVAS Early Updates:
+
+# Feb 13th: Updated Solaris XFS exploit (Intel NX support)
+# Feb 13th: 20 web application exploits 
+# Feb 7th: Adobe Acrobat Reader Javascipt Stack Overflow
+# Jan 29th: MS08-001 Windows TCP/IP IGMPv3 Overflow (single CPU kernels only at this stage)
+
+Exploit updates (new, updated):
+
+# Novell Netware Client for Windows Print Provider Stack Overflow
+# MS06-040 (Works against Server 2003 again)
+
+Feature updates:
+
+# Updated Windows kernel mode rootkit
+# Improved OS Detection
+# Improved third party exploit pack support
+# Improved windows node commands (getpasswordhashes, runcommand)
+# Improvements to web exploit dialogs
+# Improvements for HTTP-MOSDEF handler under heavy load
+# Bugs squashed, fixed, or repressed.
+
+
+6.31 Febuary 1, 2008
+
+Exploit updates (new, updated):
+
+# PHPMyBB File Include 
+# Coppermine Gallery Shell Command Execution
+# OpenOffice.org 2.3.0 (improved on Windows, un-freezes OOO correctly on close)
+# Bugfixes for shoutpro_exec and aimstats exploits
+
+
+Feature updates:
+
+# New framework for third party exploit packs
+# GUI improvements
+# JavaNode & ScriptNode can now be escalated into full MOSDEF nodes
+# Improved support for JavaNodes and ScriptNodes on Win32 machines
+# OS Detection updates
+# Bugfixes for Getallprocessdata, VulnAssess, traceroute & whereami, 
+# loadrootkit for loading .sys based rootkits on Windows added
+# hideport command for hiding ports with mosdef.sys added
+
+6.30 January 3, 2008
+
+This release includes the following CANVAS Early Updates:
+
+# December 17th, 2007: Exploit for CVE-2006-5735 (PunBB)
+
+Exploit updates (new, rewritten or improved):
+
+# OpenOffice.Org 2.3.0 (OpenOffice Database Static Java Execution)
+# MS07-065 (Microsoft Message Queueing)
+# MS05-043 (Microsoft Print Spooler)
+# MS05-017 (Microsoft Message Queueing)
+# QT RTSP Stack Overflow
+
+Feature updates:
+
+# Autohack overhaul (Massattack benefits also)
+# GUI improvements
+
+6.29 December 3, 2007
+
+This release includes the following CANVAS Early Updates:
+
+# December  3rd, 2007: SSReader 4.0 ActiveX Stack Overflow
+# November 23rd, 2007: QT RTSP Stack Overflow (Working on XP)
+# November 21st, 2007: SMTP FingerPrinter
+# November 13th, 2007: Macrovision Installshield 2008 ActiveX 
+  buffer overflow (includes targets for Win 2000 and XP SP0-2)
+
+Exploit updates (new, rewritten or improved):
+
+# VMWare DHCPD Exploit
+# Multiple Web Application exploits
+# CVS Pserverd Exploit
+
+Feature updates:
+
+# Mass SMTP scanner
+# Improved OS and service pack detection
+# GUI improvements
+
+6.28 November 1, 2007
+
+This release includes the following CANVAS Early Updates:
+
+# Oct 10th, 2007: XFS swapchar2b exploit for Solaris 10 and 8 (updated: 
+  now defeats Sol 10 SPARC Non Exec Heap)
+# Oct 15th, 2007: DB2_JDBC exploit (cve-2007-5324)
+# Oct 18th, 2007: CVE 2007-3896 Client Side exploit in IE 7 and Adobe 
+  Acrobat
+# Oct 22th, 2007: RealPlayer Import ActiveX Overflow (updated: includes 
+  all available XP targets)
+# Oct 23rd, 2007: CANVAS MacroVision Driver Exploit (local SYSTEM) XP 
+  SP2
+# Oct 24th, 2007: Microsoft IE 7 url-handling error
+# Oct 30th, 2007: GOMPlayer 2.1.6.3499 OpenURL Buffer Overflow
+
+Exploit updates (rewritten or improved):
+
+# ms06_055 Internet Explorer Vector Markup Language Overflow
+# ms06_057 Internet Explorer WebViewFolderIcon Overflow
+# ms07_004 Microsoft Windows VML recolorinfo Bug
+# ms06_071 Microsoft XML Core Services 4.0 Vulnerability
+
+Feature updates:
+
+# GeoIP integration (see NODELOVE/README.txt)
+# SPIKE Proxy now supports automatic Remote File Include exploitation (PHP)
+# BuildCallbackTrojan module added - for quick creation of tiny binary MOSDEF callback trojans
+
+
+6.27 October 2, 2007
+
+
+This release includes the following CANVAS Early Updates.
+
+# September 26, 2007: Tivoli Storage Manager Express CAD Service Stack Overflow For Windows
+# September 25, 2007: Xitami Overflow
+# September 24, 2007: Working VMWare DHCP Overflow
+# September 24, 2007: MOSDEF Update (needed for VMWare exploit)
+# September 20, 2007: VMWare DHCP Overflow
+# September 20, 2007: Exploit for Veritas Netback 
+# September 20, 2007: Exploit for Brightstore Media Server (Update)
+# September 12, 2007: Exploit for MS07-051: Microsoft Agent URL Overflow for Windows 2000
+
+New Exploits:
+
+o CVE-2007-0063 vmware_dhcpd - gets you a shell on the host from a guest
+vmware machine. Currently targets XP SP2 hosts from Linux guests. 
+
+o CVE-2007-5067 xitami - Overflow in Xitami gets you a remote shell. This is a good exploit for classes.
+
+o CVE-2005-2715 - netbackup_javaui - VERITAS NetBackup Java User Interface Format String
+
+o CVE-2007-3040 - MS07-051 - Microsoft Agent Client-Side overflow (Windows 2000 SP4)
+
+
+GUI Changes:
+
+o All new Node View! See an example at http://www.immunityinc.com/downloads/NodeView.png
+
+Other Revisions:
+
+o Screengrab now features the addition of Unix X11 screen capture
+
+o pofdetect added - passively finds Windows machines on your local network (if
+running as root on Linux since this uses the built-in sniffer)
+
+o Solaris x86 MOSDEF now fully supported (with several system call methods).
+Testvuln3_solaris_i386 has also been added.
+
+Bugfixes:
+
+o Fixed MOSDEF service install _from_ Windows CANVAS platforms
+o Lots of others. 
+
+Web Exploits (21 new additions):
+
+cmsmadesimple_eval - CMS Made Simple Eval
+joomla_eval - Joomla! 1.5 Beta code execution
+phpbb_highlight - phpBB Highlight code execution
+ajaxfb_include - Ajax File Browser 3 Beta Remote File Inclusion
+offl_include - Online Fantasy Football League 0.2.6 Remote file inclusion
+txxcms_include - TxxCMS 0.2 Remote file inclusion
+anyinventory_include - AnyInventory => 2.0 Remote file inclusion
+phpffl_include - phpFFL 1.24 Remote file inclusion
+webed_include - WebEd Remote file inclusion
+izicontents_include - iziContents Remote file inclusion
+enetman_include - eNetman Remote file inclusion
+joomlaradiov5_include - Joomla Radio v5 Component Remote File Inclusion
+phpmytourney_include - phpMytourney Remote file inclusion
+helplink_include - HelpLink Remote file inclusion
+dfdcart_include - DFD Cart Remote file inclusion
+phpbg_include - phpBG Remote file inclusion
+nuclearbb_include - NuclearBB Alpha 2 Remote file inclusion
+phprealty_include - PHPrealty Remote file inclusion
+wordsmith_include - Wordsmith Remote file inclusion
+phpbbplus_include - phpBBplus Remote file inclusion
+streamline_include - Streamline media server Remote file inclusion
+
+
+6.26 September 1, 2007
+
+New Exploits:
+
+o Solaris 10/11 Telnet -f bug
+o HP OpenView Trace Service Buffer Overflow
+o Borland Intervase ibserver Create-Request Buffer Overflow
+o Novell Netware Client for Windows Printer Provider RPC stack overflow
+
+16 new Web Exploits:
+
+adminbot_include
+cep_include
+flip_include
+frontaccount_include
+gallery1_include
+gneric_include
+lavague_include
+linksnet_include
+ncaster_include
+news2_include
+ote_include
+pbd_include
+philex_include
+phpnews_include
+someryc_include
+troforum_include
+
+New APIS:
+
+For those of you writing PHP include bugs, CANVAS is getting more and more
+mature when it comes to an API for doing so quickly and easily. In this month's
+release the spkproxy module has garnered a new object to make CANVAS friendly
+for all your perl exploits, the UserAgent object.
+
+UA = spkproxy.UserAgent(protocol+"://"+self.host+"/"+self.basepath, \
+auth=auth, hostname=self.hostname, exploit=self)
+data = {"A", "B"}
+result = UA.POST("bob.php?var=arg", data=data)
+
+# Or you can upload a file using MIME multipart!
+fields["samstown"] = "upload"
+files=[("attachment", "sam.data", filedata)]
+#now upload the file
+UA.multipart("swap.php", fields, files)
+  
+Obviously GET and PUT are also supported, and the API also will recognize
+cookies in the response and remember them for subsequent calls, making it easy
+to log into web services and then exploit them.
+
+You can also call spkproxy.urlopen() directly and it will behave as you would
+want it to. Proxies and other niceties are supported as you would expect.
+
+
+6.25 August 1, 2007
+
+GUI Changes:
+
+GUI overhaul by Dan Felts! (Thanks Dan!) You'll notice everything looks 
+a lot nicer.
+
+New Modules:
+
+o TCP SYN (port 80) and regular UDP traceroute module added
+
+o NessusXML and NMAP XML import modules added by Dan Felts (Thanks again! :>)
+
+o Netopia ADSL/Wireless router attack module
+
+o CVE-2007-3681 Winpcap vulnerability added - gets local SYSTEM on machines
+without the GDI Win32k.sys patch installed. (Which kind of ruins the point,
+but it's quite interesting to see, regardless)
+
+o getwwwhostnames This utility grabs a list of hostnames that apply to a web
+server. This is commonly used with web attack modules which can automatically
+attack all the hostnames (rather than just the default).
+
+Thirteen new web attack modules:
+o b1gbb_include
+o limesurvey_include
+o minibill_include
+o musoo_include
+o powl_include     
+o serweb_include   
+o sunboard_include
+o dagger_include  
+o lms_include         
+o mknoboard_include
+o phpsitebackup_include  
+o ripecms_include  
+o sphpell_include
+
+
+Engine Changes:
+
+o New x86 assembler added - twice as fast as the old one, resulting in MOSDEF
+and exploit speedups. Likewise, the assembler no longer uses recursion, which
+lets you assembly much larger code without worry that you'll fill up your
+stack!
+
+
+6.24 July 2, 2007
+
+New Additions:
+o Fuzzers directory (and SPIKE 3.0) added to CANVAS Professional
+
+You'll find that this command will crash pretty much any Win32 TFTP server. If
+not, try some of the other tftp scripts. We use this in some of our classes,
+and have found bugs in every downloadable TFTP server we've tried.
+
+fuzzers/spike.py -t 192.168.24.128 -s fuzzers/SPIKESCRIPTS/tftpd1.spk -P UDP -V 0:0 -p 69
+
+This URL has more information the MSRPC portion of the fuzzer.
+http://www.immunityinc.com/downloads/msrpc_fuzzing.odp
+
+
+o VersionCheck added (will call back to Immunity to see if there is a new
+version available, you can configure this to be off by editing Canvas.conf)
+
+Web Exploits added:
+o geeklog2_remote
+o phphtml_remote
+o xoops_cjcontent
+o xoops_tinycontent
+o mazensphpchat_remote
+o sitellite_remote
+o xoops_horoscope
+o xoops_xtconteudo
+o persism_remote
+o WAnewsletter_remote
+o xoops_icontent
+
+Exploits:
+o ms07_031 (DoS in ssl) added 
+
+Engine updates:
+o PPC Linux MOSDEF added
+
+o 64 bit Python compatibility for CANVAS (Ubuntu AMD64, Vista 64 etc.) 
+
+o tcpscan.exe fixed for Vista and XP SP2 in default conditions. This
+means you are limited to 5 outbound TCP sockets at once - which will
+make your portscans a lot slower, but will not have false positives.
+You can still use tcpscan.exe manually with up to 64 sockets at once.
+
+
+6.23 June 1, 2007
+
+New Features:
+
+o ./commandlineInterface.py has a new UNIXSHELL option. This allows you to use
+the shellserver commands from the commandline. It's useful for uploading and
+downloading files, for example. To connect to it, any callback /bin/sh
+shellcode or a nc -e /bin/sh will work. (See MU, below).
+
+The commandline interface also has readline support again. For those of you on
+Windows trying to quit CANVAS on the commandline, you'll want to use the
+control-Break key, rather than control-C.
+
+o Non-executable stack support in ani_cursor
+
+o BSD MOSDEF moved to the new MOSDEF ShellServer engine .. currently tested
+with FreeBSD i386 (now with working upload/download).
+
+New Exploits:
+
+o tm_sprotectagent - exploit for TrendMicro ServerProtect MSRPC overflow
+
+o MU - Exploit for OS X mDNS. Supports both Intel and PPC, although with Intel
+OS X you will get back a UNIXSHELL, rather than a MOSDEFSHELL. (Currently our
+Intel OS X does an execve shellcode). OS detection against OS X sometimes
+works, but sometimes does not. The version 0, for MU, will auto-attack, but
+will assume only Intel versions.
+
+o solaris_samba - reliable remote root exploit for Samba LsaLookupSids heap
+overflow against Samba Servers on Solaris 8/9/10 (CVE-2007-2446).
+
+Five new web application exploits:
+
+o aimstats_exec
+o mygallery_remote
+o shoutpro_exec
+o wordtube_remote
+o wptable_remote
+
+6.22 May 1, 2007
+
+New Exploits: 
+
+Four new web exploits for PHP injection vulnerabilities. These will autodetect
+a base path, and give you a PHP Node. PHP Nodes can upload/download/run
+commands, which is enough to upload a testvuln3 and get a MOSDEF shell.
+
+o flatchat2_exec
+o dfblog4_exec
+o blog_pixelmotion
+o lsgb_exec
+
+The MSDNS 0day:
+
+o msdnsrpc 
+
+Tested on:
+
+Windows 2000 Advanced Server SP4 English UP2DATE
+Windows 2003 Server Standard SP0 English OOTB
+Windows 2003 Server Standard SP1 English OOTB (with DEP AlwaysOff)
+Windows 2003 Server Standard SP2 English OOTB (with DEP AlwaysOff)
+
+o CA BrightStor Backup Media Server RPC Overflow
+
+o Novell Groupwise Web Access Base64 Stack Overflow
+
+o Lotus Domino IMAP4 Server CRAM-MD5 Overflow
+
+New Features:
+
+o HTTP MOSDEF v0.1
+
+HTTP MOSDEF is a MOSDEF based HTTP tunneling solution for use with our
+Windows clientside exploits. It currently works with the BABYBOTTLE
+and ani_cursor exploits and will do full HTTP based tunneling. This
+includes being able to operate via web proxies. It uses the WinInet
+API to automatically detect any existing browser proxy settings.
+
+To test HTTP MOSDEF v0.1, it is preferred you run CANVAS as root due
+to port binding semantics. You can then either link in BABYBOTTLE or
+ani_cursor using the httpserver module and select the HTTP MOSDEF
+checkbox.
+
+Right now, you'll want to use the GUI only to use HTTP MOSDEF.
+
+Tools:
+
+o getservices - 
+
+This module will list all the services available on a remote machine using a
+named pipe that allows anonymous access. This will work against 2000 up to and
+including SP4, but was fixed in Update Rollup 1 for SP4. Above that (UR1, XP,
+etc), a username and password will be needed.
+
+o atsvc - Remotely run programs with username and auth via Window's built in
+"at service"
+
+o TEMPLATES:
+
+For those of you who write your own exploits, we've added our TEMPLATE
+directory to the main distribution. 
+
+Usage: TEMPLATES/newmodule.py -t <module type> -n <module name> [-O arg:value]
+Win32Local: A local exploit for Windows
+Info: An information gathering module, such as a recon module
+HTTP: A simple exploit for an HTTP server (php eval)
+FTPD: A simple exploit for an FTP server
+Win32Exploit: A remote windows exploit
+UnixLocalExploit: A local unix exploit or command to get privs
+EmailClientSide: An exploit that you spam out at email addresses
+ClientSideExploit: A client-side exploit (http)
+Command: A local command run on nodes such as win32Nodes
+php_include: Remote PHP include exploits
+TFTP: TFTP Exploits (win32)
+Config: A module that sets configuration information
+MSRPCExploit: A remote MSRPC exploit
+HTTP Command: execve/system exploit in an http server
+
+Fixes:
+
+Solaris Nodes now have a functional upload and download again.
+
+
+6.21 April 1, 2007
+
+Engine updates:
+
+o pelib: our PE library has been improved and extended
+
+o win32MosdefShellServer: support for raw syscalls added
+
+o auto callback: exploits can now automagically find and set the right 
+callback interface based on the target address. This affects how you 
+write clientside modules. Set self.autoFind to False.
+
+o portsweep: our port sweep module has been revised and improved for 
+better performance
+
+o sniffer: our sniffer has been optimised for speed
+
+o osdetect: bug fix in Vista detection
+
+Tool and Command updates:
+
+o upexec: a module that allows you to use binary based local exploits 
+that return a shell within the CANVAS framework
+
+o installremotemosdefservice: bug fix in os detection logic
+
+o startremoteservice: bug fix in os detection logic
+
+Exploit updates:
+
+o spooler: auto versioning enabled
+
+o GDIWrite4: exploit for CVE-2006-5758
+
+o wftpd: exploit for WFTPD v3.23 stack overflow
+
+o easyfilesharing: exploit for EasyFileSharing v2.0 stack overflow
+
+o cesarftp: exploit for CesarFTP v0.99 stack overflow (XP SP2 DEP)
+
+o filecopa: exploit for FileCOPA stack overflow
+
+o MercurImapSubscribe: exploit for Mercur Imap stack overflow
+
+o netmail_webadmin: Novell Netmail WebAdmin Auth stack overflow
+
+o tm_sprotect: exploit for Trend Micro ServerProtect stack overflow
+
+o samiftp: exploit for SamiFTP stack overflow
+
+o warftp_165: exploit for WarFTP 1.65 PreAuth stack overflow 
+
+o utorrent: exploit for Utorrent announce overflow
+
+o MS06_040 has improved Windows 2003 support
+
+o snortrpc: exploit for Snort <= 2.6.1.2 DCERPC Reassembly stack overflow
+
+o ani_cursor: exploit for Windows ANI File Format Parser overflow
+
+GUI Updates:
+
+o Multiple targeting added - Use Shift-Click to select multiple hosts and then
+click the Targeting buttons to select multiple targets at once. The first
+target is the "primary" target, which is what will show up in the exploit
+dialog windows. Run any exploit and it will run against all the targets at
+once. On Windows XP SP2 and Windows Vista you should select no more than 5
+hosts at once due to the Windows Half-Open TCP socket limit.
+
+6.20 March 1, 2007
+
+Engine updates:
+
+o MOSDEF caching received a bugfix that dramatically improves overall 
+MOSDEF speed and performance.
+
+o Screengrab now uses files rather than loading images entirely into 
+memory. This results in a large performance improvement. Additionally, 
+screengrab outputs valid BMP files which can be viewed with any image 
+viewer, or imported into reports quickly and easily.
+
+o Userenum has undergone changes that allow it to operate much faster.
+
+o Msrpc.py received many bugfixes, including a tcp authentication fix 
+and a fix for UUID minor versions.
+
+Massattack updates:
+
+o Massattack now has auto-trojan capabilities. If we get a new node and 
+you have placed a massattack_win32trojan.exe in the CANVAS root, it 
+will be uploaded and run.
+
+o Massattack no longer attacks its own IP address.
+
+o Maxthreads option added to allow you to set the optimal thread load 
+for your platform. e.g. 5 is a good number for Vista and 65535 is a good 
+number for Linux.
+
+Exploit updates:
+
+o ms06_040 had a target added for Windows 2003 SP0.
+
+o ms03_049 was rewritten and had a Windows 2000 target added. It was 
+also ported to French, Simplified Chinese, and Japanese Windows.
+
+o ms04_011 was ported to Spanish, Italian, and Dutch Windows.
+
+o ms04_049 was ported to Dutch, and Italian Windows.
+
+
+6.19 February 1, 2007
+
+New Exploits:
+
+  o Citrix_pp: Exploit for custom print provider Citrix installs. Also works
+  against XP SP2 (with DEP).
+  
+  o iis_doubledecode: This module exploits the rather old IIS 5.0 Double
+  Decode vulnerability using CANVAS's new CLE. It's a good sample exploit,
+  and perhaps useful for testing IDS signatures.
+
+  o 3ComTFTP: An exploit for the overflow in 3ComTFTPSvc. Originally
+  written with VisualSploit. 
+
+  o ms07_004: VML recolorinfo exploit (reliable even against XP SP2)
+  Clientside: use with the httpserver module from 'Servers'
+
+  o qt_rtsp: Quicktime RTSP overflow - reliable against XP SP2
+  Clientside: use with the httpserver module from 'Servers'
+  
+  o test_cle: A tester exploit for use with the http_command.py backdoor.
+  
+Immunity continues our efforts to provide exploits that work against all
+Windows languages, all Windows service packs, and Windows NT 4.0 . Many
+exploits were rewritten to be cross-language and cross-service pack including
+the following:
+
+o ms04_045 (WINS Name Validation)
+o ms03_026 (Original LSD MSRPC Overflow)
+o ms03_001 (RPC Locator)
+o ms04_031 (NetDDE Stack Overflow)
+o ms04_011 (LSASS Stack Overflow)
+
+New Features:
+
+  o Beta IPv6 support: All our Win32 MSRPC attacks will now function over IPv6.
+  Currently IPv6 is supported with both Windows and Linux localNodes, i.e. the
+  actual CANVAS host. IPv6 support is transparent and if your CANVAS host supports
+  it, it will automatically bring the IPv6 functionality into play. If you
+  experience any problems with the IPv6 support please contact bas@immunityinc.com
+
+  Suggested method of testing IPv6 support is to use our ms03_026 exploit against
+  a Windows 2003 SP0 over IPv6. Please note that when using CANVAS on Win32 you
+  will have add the correct scopeID for your target. You can defer these from the
+  IPv6 interface list. 
+
+  Beta IPv6 support requires you to run Python 2.4.4 or greater for optimal
+  results.
+
+  o Halting of exploits now recurses to any child exploits. For example, 
+  if you halt VulnAssess or Massattack, it will halt any exploits they have started.
+  
+  o Command Line Executer (CLE) is now available for exploits. It will try to
+  load MOSDEF shells on remote systems given the ability to run commands
+  blindly. Useful especially for web passthrough()/system()/popen() bugs.
+  Currently tested on Linux/x86 and Windows/x86. The Windows version supports
+  TFTP and debug.exe methods of uploading files, and the Unix version supports
+  several TCP and HTTP uploaders.
+
+  o HTTP Server is useful as a simple backdoor (or CLE tester)
+  exploits/httpserver/httpserver.py -O singleexploit:runcommand -O blind:1 -p 8080
+
+  o Also included is backdoors/http_commander.py (even simpler backdoor for CLE testing)
+
+  o MOSDEF compiler is able to compile a MOSDEF backdoor on Unix systems
+	Example: MOSDEF/cc.py -m Linux -p x86 -D CBACK_PORT=1 -D CBACK_ADDR=1.1.1.1 -T backdoors/cback_mmap_rwx.c 
+
+
+
+6.18 January 1, 2007
+
+First and foremost, happy new year from Immunity!
+
+The Immunity santa comes bearing a bunch of gifts this first day of the 
+new year. Yes, when Santa's done delivering the regular toys, he goes 
+around dropping shells. Ho ho ho, as they say.
+
+This release contains a lot of new toys, most noticably a large 
+collection of new exploit modules and updates
+
+New exploits:
+
+o Heroes: exploit module for MS06_074, Windows SNMP vulnerability
+o Symantec_rm: exploit module for Symantec Remote Management Overflow
+o Netmail: exploit module for Novell Netmail 3.52 pre-auth stack 
+  overflow
+o Netware_pp: exploit for Novell Netware Client Print Provider overflow. 
+  Also working against XP SP2 with DEP.
+o MS04_045: exploit for WINS Name Association Stack Overflow (was 
+  patched alongside the pointer hijacking vulnerability, works reliably 
+  acrosss NT 4.0 SP6a and Windows 2000 SP0-SP4)
+
+Exploit updates:
+
+o MS06_070 was updated to include a fake _local_ (it has to be 
+  reachable by netbios broadcasts) domain controller
+o MS01_023 was rewritten from scratch for IIS 5.0 IPP ISAPI stack 
+  overflow (language independent)
+o MS01_033: was rewritten from scratch for IIS 5.0 Index Server ISAPI 
+  (.ida) stack overflow (language independent)
+o MS03_022: was rewritten from scratch for nsisslog.dll overflow
+
+6.17 December 1, 2006 
+
+New Exploits:
+
+o MS06_066 - Microsoft Network Client RPC overflow (supports XP SP2 with DEP!)
+o MS06_070 - Microsoft Workstation RPC overflow (requires external domain)
+o Novell eDirectory HttpStk.dlm Overflow for 8.8 and 8.8,1 
+o MS07_071 - Microsoft XML Core Services Client Side overflow (ms_xmlcore)
+o Linux /proc a.out vulnerability (not a race condition, as previously assumed)
+
+New Recon Tools:
+
+o GetPrintProviders - this module allows you to determine the print providers 
+on a remote Windows  machine. Also works against XP SP2! Print providers are 
+localized and this data feeds into Immunity's remote language detection 
+module to more accurately determine the language of Windows machines.
+
+o UserEnum gets all users now, not just logged in users. This will get 
+automatically called by getremotelanguage.
+ 
+New Features:
+
+o mosdefmigrate module now can inject into DEP protected processes. MOSDEF 
+itself works with DEP now as well. testvuln3.exe has been ported to be 
+DEP-clean.
+
+o MSRPC exploits (and recon tools like userenum) will now also try to 
+connect with a fake username to bypass XP's simple sharing check 
+
+o SPIKE Proxy now lets you edit multipart/mime data.
+
+o SmartList feature - An intelligent mechanism for preventing CANVAS from 
+attacking sensitive hosts
+
+o callback loop - this module allows you to be flexible with MOSDEF callbacks. 
+You can send a callback to a specified location or send a callback to a 
+specified location with a X second interval and Y repeats. The callback runs 
+in it's own thread, so you can send an additional MOSDEF shell to  
+someone else on your team.
+
+o JavaNode - this is a useful backdoor on systems that support gcj (Gnu Java 
+Compiler) or useful for Java injection attacks. Also supplied (in backdoors/
+java2jsp.py) is a conversion utility to turn the JavaNode.java into a 
+valid servlet.  
+
+o Massattack reports are much prettier, including screenshots where possible. 

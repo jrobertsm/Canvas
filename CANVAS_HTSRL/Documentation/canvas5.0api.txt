@@ -1,0 +1,188 @@
+
+This is developer documentation for the CANVAS 5.0 API. This is useful if you want to write exploits,
+or if you want to extend the CANVAS internals.
+
+
+
+Components of CANVAS
+ o MOSDEF
+ o Outside libraries
+ o Exploits
+ o GUI
+ o canvasengine
+ 
+
+ 
+Outside Libraries
+ 
+exploitutils.py
+
+Exploitutils is a collection of routines useful in many circumstances. These
+are split into many groups.
+
+Printouts:
+
+prettyprint/hexprint/cleanhexprint are all used to print out potentially
+binary data in a way that is more palatable to human eyes.
+
+Data Conversion:
+
+struct.pack/unpack is an extremely useful module, but has some problems:
+o It can be difficult to read
+o It can have problems on AMD64 or other 64-bit processors where a "L" is
+actually 64 bits instead of 32.
+
+So CANVAS has it's own routines for doing this sort of thing. intel_order()
+and big_order() are the most commonly seen. You'll often see a module alias
+self.order() to one or the other. These both take in integers, and convert
+them to four bytes of string data, in little or big endian format
+respectively.
+
+There are also other routines for the reverse conversions.
+
+msunistring() is another commonly used function, which takes a normal string,
+and converts it to the format Microsoft expects, including a null terminator.
+
+uint32() tries to do the right thing for integers to make them unsigned int
+compatable.
+
+other exploit utilities:
+
+standard_callback_commandline(app,node=None,args=None) is used in two conditions:
+o by runmodule from the commandlineInterface
+o by the __main__ of exploits run from the command line
+
+One change made with 5.0 was that you can now do -O name:value for arguments.
+For this reason, the arguments in argsDict of an exploit should not contain
+spaces.
+
+
+MOSDEF
+
+MOSDEF is our C compiler. It's not exactly all of C, and so for this reason, it
+requires a light touch. While you're writing MOSDEF, it's important to
+remember that it is providing a lot of value when you get frustrated with it. :>
+
+MOSDEF supports a large subset of the C language. It does have holes though,
+and the most serious hole is the lack of typedef. Although you can define
+structures, you cannot typedef DWORD int; This is because of a lack in the
+spark.py compiler creation code and would require a hefty rewrite to make
+work.
+
+The best use of MOSDEF is to move loops over to the remote side. You want
+anything that loops remote, because otherwise you pay latency and bandwidth
+costs. MOSDEF includes some basic routines for sending data back and forth. Currently, MOSDEF 
+
+
+EXPLOITS
+
+Q: How do I call one exploit module from another and get the result?
+A: The easiest way to do this is to look at how scanner or autohack works. You'll need to do the following steps:
+1. Get a handle to the exploit object you want to call:
+app=self.engine.getModuleExploit("someexploit")
+app.link(self) # this will set all its arguments to your arguments
+ret=app.run() #run the exploit in your thread
+ret will now be a shellserver if the application was a working exploit that stole the socket, 1, 0 or None else.
+You may want to put a try: except: around the run() if the exploit might raise an exception.
+result=app.result #get the result. This can be a list, dictionary, tuple, integer, etc.
+
+
+Commandline Arguments to exploits:
+
+self.options is a string that will be printed out when asked for.
+Likewise, self.displayVersions() will be called to print out the versions
+the exploit supports.
+
+Loading a module from an Exploit
+
+First of all, a common reason for a long pause is that the canvas engine has
+been asked to load its entire list of modules. This is most likely because you
+tried to self.engine.getModuleExploit() a module that was not in the precache
+list.
+
+This is how osdetect avoids that long pause. You can call this again and again
+at almost no cost, so don't be shy with it.
+
+        canvasengine.registerSomeModules(["telnetbanner","Insight","spdetect"])
+
+Shellcode
+
+Use the ordinal code to create a <400 byte shellcode
+createSmallWin32Shellcode() 
+
+Otherwise, the standard shellcode is <800 bytes or so.
+
+HeapInject code
+04:23PM <bas> if you're not using smallcode it does need fromcreatethread btw (set automtaiclaly from GUI)
+
+03:57PM <bas> btw if you use 'smallcode=1' to the create function you end up
+          with a 679 byte total injectcode (ie: including the connectback) in
+          case you ever need it
+
+  CANVAS now finally support knowledge containers which is a really cool thing to use. The knowledge containers are global recipients that can hold any information we want about a specific target and we can reuse it on a specific exploit or on any exploit.
+  So, for example if we have a bruteforce exploit (like pserverd), once we found the correct offset/hardcoded address/whatever we can save it on the target knowledge container like: 
+
+  self.target.add_knowledge(tag, known, percentage, invisible=1)
+
+  tag: tag is a string that is use as the name of the object you hold on the container. It will be used as a index to retrive it later. Becareful to use a unique name, EXPLOIT_NAME would be a good idea. 
+  known: is whatever object, string, integer, tuple etc that you will save and rretrieve it later.
+  percentage: is a number, from now on, just put 100
+  invisible: By default is 0, which means that if u put a string or a class with a __str__() attribute, then the container will be shown behind the IP address on the GUI.
+
+  Once you set the information on the knowledge container, you can get it like:
+
+  self.target.get_knowledge(tag)
+
+  get_knowledge would return a "KnowledgePrimitive", the only thing we want to know about it is: object.tag (tag name), object.known (The object) and object.percentage (percentage number). In case there is no container with that 'tag name' it will return None.
+
+  This is implemented on portscan and osdetect, so if u want to know from your exploit the os (of course, the osdetect must be runned before) do:
+
+  kprim=self.target.get_knowledge("OS")
+  if kprim:
+         print "OS: %s" % kprim.known
+
+Automation of Exploits across Networks
+
+There are simple CANVAS API's for making your exploit scan across a network.
+They all take a self.host and a self.netmask and a node (to add new hosts to).
+
+run_on_all_alive_hosts()
+Does discovery, although it assumes known hosts are alive
+
+run_on_all_known_hosts()
+Runs on all known hosts
+
+run_on_all_possible_hosts()
+Runs on all hosts in the netmask
+
+So basically any exploit can be made automatable over a netmask range now. 
+See scanner and autohack for some quick examples.
+
+
+Please don't use urllib.urlopen() in exploits.
+
+1. It doesn't use self.gettcpsock()
+2. If the stupid website has a username/password, it prompts the user. Which is fine sometimes,
+but it means test() will pause for user input, which is mucho annoyingoso when scanning.
+
+
+Locals:
+
+15:48 < nico> cause i want to do a
+15:48 < nico>         self.shell.clearfunctioncache()
+15:48 < nico> and compile
+15:48 < nico> and all that shizzles
+15:48 < dave> so you want to do
+              self.argsDict["passednodes"][0].shell.clearfunctioncache()
+15:48 < nico> oh
+15:48 < dave> usually I do
+15:48 < intern> duh
+15:48 < dave> node=self.argsDict["passednodes"][0]
+15:49 < dave> or node=self.getDefaultNode() <---lemme double check this API
+15:49 < nico> cool, thx
+15:50 < dave> getfirstnode()
+15:50 < dave> so node=self.getfirstnode()
+15:50 < dave> node.shell.clearfunctioncache() (compile, etc)
+
+
+

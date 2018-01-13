@@ -1,0 +1,46 @@
+# NOTE:
+# If you install python before, or install the ports in different order and the GUI 
+# is not working for you, try uninstalll all the port and install it in the right order
+
+
+[o] Install XcodeTools:
+        -> Sometimes, the installer is on your HD already:
+	 Applications->Installers->Xcode Tools->XcodeTools.mpkg
+        -> Or find it on the Tiger DVD
+        -> Or download it from apple.com website
+
+           
+[o] Download and install Darwinports :
+
+	http://www.darwinports.org/getdp/
+	The usual: ./configure && make && sudo make install
+	once they are installed:
+	(change PATH to /opt/local/bin)
+
+	If you are behind an http_proxy, you would probably need:
+	$ sudo -s
+	# export RSYNC_PROXY=192.168.1.1:3128
+	# export ftp_proxy=192.168.1.1:3128
+	# export http_proxy=192.168.1.1:3128
+	# port -d selfupdate
+	
+	or just	
+	$ sudo port -d selfupdate
+	
+[o] Install libglade and pygtk
+	$ sudo port install libglade2 py-gtk2
+
+[o] Install X11?
+       If you dont have X11 (Tiger OSX users can find it on the DVD, go to "Optional Installs)) you can download it from the Apple website:
+	http://www.apple.com/downloads/macosx/apple/x11formacosx.html
+	Download X11User.dmg and install it 
+
+[o] Run X11 
+   Having X11 doesn't mean your GUI will change at all, it will simply open an xterm where you will be able to run the CANVAS gui.
+   $ /Applications/Utilities/X11.app/Contents/MacOS/X11 &
+
+[o] run canvas :D
+ /opt/local/bin/python ./runcanvas.py
+
+
+

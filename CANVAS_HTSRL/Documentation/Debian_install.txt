@@ -1,0 +1,5 @@
+
+- Debian, Gentoo, Ubuntu:
+
+$ sudo apt-get -qy install python2.4 python2.4-gtk2 python2.4-glade2
+

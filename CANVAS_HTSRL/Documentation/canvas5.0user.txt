@@ -1,0 +1,74 @@
+This is documentation for CANVAS 5.0 Users
+
+First of all. Welcome to CANVAS! We, the CANVAS team, hope you'll find CANVAS
+extremely useful, and even perhaps fun to use. Remember, like all complex tools,
+CANVAS is something you'll want to try in a controlled environment, like a lab, first, 
+before attempting something complex in the real world. That said, CANVAS is remarkably
+easy to use once you get the hang of it. This document should help, but feel free
+to ask questions of the team at admin@immunityinc.com if you get confused.
+
+
+Contents:
+
+o Quickstart notes (readme first)
+
+o GUI usage notes
+
+o Commandline notes
+
+o Integration with other tools
+_________________________________________________________________________
+
+Quickstart notes:
+
+This section is for those people who don't like to read documentation. You'll
+want to test CANVAS on a testbox to get a feel for it first. Here's what I'd do:
+
+Install a Windows 2000 SP 4 box somewhere. Get it's IP. Then boot CANVAS's
+GUI. The most important window here is the Node Tree. Go into the node tree,
+expand it until you see "Known Hosts" and add a host with the IP that you
+specified. Then go down to "Interfaces" and right click on the interface that
+you want to get callbacks on. Make this your default callback. If you're on
+Linux, this is probably eth0. On Windows, it's probably Local Ethernet
+Adaptor. One exception is if you're using VMWare and the VMWare machine is set
+up to do host-only or NAT networking. 
+
+Once you have your callback and target set, choose the lsass exploit from the
+left window pane, and fire away. Some things should scroll by, and then a
+Shell Window will pop up. Click the getpwd (and wait a bit - MOSDEF is slow
+the first time). Click it again to get your directory a second time (quickly,
+since it's cached).
+
+Running a command will be slow the first time as well. After that, try some of
+the utilities in the Command pane. Screenshot is probably the most fun, but
+pwdump can be useful as well. You can view your screenshots at any time using
+pretty icon in the menubar. If you get an all black "Screenshot" that means that
+the user you broke into did not have the privileges needed to take a screenshot.
+
+_______________________________________________________________________________
+
+
+GUI Usage Notes:
+
+FAQ:
+This is a list of commonly asked questions about the CANVAS GUI.
+
+Q: Why can't I edit the hosts field in the exploit dialog box?
+A: The Host field in the dialog is filled in automatically by the CANVAS GUI. If you 
+want to change the target, add a new target using the right mouse button under 
+"known hosts" (or via one of the other modules, such as addfromfile), and select
+it with the right mouse button.
+
+
+Integration with other tools
+
+FAQ
+
+Q. Is there any way to use CANVAS to bounce through another host when my
+initial exploitation was not through CANVAS?
+
+A. At some point we'll have a "cmd.exe to MOSDEF" module, but for now, the
+best way is to use testvuln1.exe (listens on a socket) or testvuln3.exe (calls
+back) to connect to CANVAS. Of course, you can always do this through some
+other tool, such as Hydrogen. At some point we'll find a way to let you steal the
+socket descriptor from another tool as well.
